@@ -1,8 +1,6 @@
 <template>
     <div>
-        Home
-
-        {{quoteText}}
+        Forum
     </div>
 </template>
 <script>

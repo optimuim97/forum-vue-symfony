@@ -38,20 +38,19 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/api/v1/comment', name: 'app_create_article', methods : ['POST'])]
+    #[Route('/api/v1/comment', name: 'app_create_comment', methods : ['POST'])]
     public function createComment(Request $request)
     {   
-        $id = $request->request->get('article_id');
+        $id = $request->request->get('id');
         
         $article = $this->articleRepository->find($id);
         
         $comment = new Comment();
         $comment->setComment($request->request->get('comment'))  
-                // ->setUser($request->request->get($this->user))
-                ->setArticle($article)
-                // ->set($request->request->get($this->user))
-                // ->setAuthor($this->user)
-                ;
+                ->setUser($this->getUser())
+                ->setArticle($article);
+        
+        $article->addComment($comment);
         
         $this->em->persist($comment);
         $this->em->flush();

@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+// use ApiPlatform\Core\Annotation\ApiResource as AnnotationApiResource;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+// #[AnnotationApiResource()]
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
 {
@@ -60,10 +62,10 @@ class Article
         return $this;
     }
 
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
+    // public function getAuthor(): ?User
+    // {
+    //     return $this->author;
+    // }
 
     public function setAuthor(?User $author): self
     {

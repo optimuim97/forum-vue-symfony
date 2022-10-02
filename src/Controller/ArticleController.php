@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,8 +16,9 @@ class ArticleController extends AbstractController
     
     private $em;
     private $articleRepository;
-    public function __construct(ArticleRepository $articleRepository, EntityManagerInterface $em){
+    public function __construct(ArticleRepository $articleRepository,UserRepository $authorRepo,EntityManagerInterface $em){
         $this->articleRepository = $articleRepository;
+        $this->authorRepo = $authorRepo;
         $this->em = $em;
     }   
 
@@ -25,7 +27,6 @@ class ArticleController extends AbstractController
     {
         $articles = $this->articleRepository->findAll();
         $length = count($articles);
-        // serialize($articles);
        
         return $this->json([
             "message" => "All articles in database",
@@ -38,12 +39,13 @@ class ArticleController extends AbstractController
     #[Route('/api/v1/article', name: 'app_create_article', methods : ['POST'])]
     public function createArticle(Request $request)
     {   
+        $author = $this->getUser();
+       
         $article = new Article();
         $article->setTitle($request->request->get('title'))  
                 ->setContent($request->request->get('content'))
-                // ->setAuthor($this->user)
-                ;
-        
+                ->setAuthor($author);
+
         $this->em->persist($article);
         $this->em->flush();
 
@@ -67,7 +69,7 @@ class ArticleController extends AbstractController
             exit;
         }
 
-        serialize($article);
+        // serialize($article);
        
         return $this->json([
             "message" => "Article exist!",

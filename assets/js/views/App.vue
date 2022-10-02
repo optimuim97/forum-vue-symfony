@@ -1,10 +1,11 @@
 <template>
-    <v-app>
+    <v-app> 
         <v-main>
             <v-container fluid>
                 <router-view>
-
-        <!---             <router-link to="<my_route>">My Component</router-link> -->
+                    <router-link to="Home">Home</router-link>
+                    <router-link to="Login">Login</router-link>
+                    <router-link to="Register">Register</router-link>
                 </router-view>
             </v-container>
         </v-main>
@@ -15,6 +16,7 @@ export default {
     name: "App"
 }
 </script>
+
 <style scoped>
 
 </style>

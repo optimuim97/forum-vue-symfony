@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource as AnnotationApiResource;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+// #[AnnotationApiResource()]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
  
-
     use ResourceId;
     use Timestapable;
 
@@ -40,10 +41,10 @@ class Comment
         return $this;
     }
 
-    public function getArticle(): ?Article
-    {
-        return $this->article;
-    }
+    // public function getArticle(): ?Article
+    // {
+    //     return $this->article;
+    // }
 
     public function setArticle(?Article $article): self
     {

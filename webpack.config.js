@@ -78,4 +78,3 @@ Encore
 
 module.exports = Encore.getWebpackConfig();
 
-

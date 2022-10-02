@@ -1,8 +1,9 @@
 {
     "devDependencies": {
         "@babel/core": "^7.19.3",
+        "@babel/node": "^7.19.1",
         "@babel/preset-env": "^7.19.3",
-        "@symfony/webpack-encore": "^4.0.0",
+        "@symfony/webpack-encore": "4.0.0",
         "core-js": "3.25.1",
         "deepmerge": "4.2.2",
         "fibers": "5.0.3",
@@ -10,23 +11,23 @@
         "regenerator-runtime": "0.13.9",
         "sass": "1.54.9",
         "sass-loader": "13.0.2",
-        "vue-loader": "^15.10.0",
-        "vue-template-compiler": "^2.6.14",
-        "webpack": "^5.74.0",
+        "vue-loader": "17.0.0",
+        "vue-template-compiler": "2.7.10",
         "webpack-cli": "^4.10.0",
         "webpack-notifier": "1.15.0"
     },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress"
+        "dev-server": "./node_modules/@symfony/webpack-encore/bin/encore.js dev-server",
+        "dev": "./node_modules/@symfony/webpack-encore/bin/encore.js dev",
+        "watch": "./node_modules/@symfony/webpack-encore/bin/encore.js dev --watch",
+        "build": "./node_modules/@symfony/webpack-encore/bin/encore.js production"
     },
     "dependencies": {
-        "vue": "^2.6.14",
-        "vue-router": "^4.1.5",
-        "vuetify": "^2.6.10"
+        "vue": "3.2.39",
+        "vue-router": "4.1.5",
+        "vuetify": "2.6.10",
+        "webpack": "^5.74.0"
     }
 }

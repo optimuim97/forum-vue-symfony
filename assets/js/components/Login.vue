@@ -1,8 +1,6 @@
 <template>
     <div>
         Login
-    {{quoteText}}
-    {{authorName}}
     </div>
 </template>
 <script>
@@ -17,7 +15,6 @@
         }
     }
 </script>
-
 <style scoped>
     .quoteText {
         position: relative;
