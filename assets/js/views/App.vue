@@ -1,20 +1,27 @@
 <template>
-    <v-app> 
-        <v-main>
-            <v-container fluid>
-                <router-view>
-                    <router-link to="Home">Home</router-link>
-                    <router-link to="Login">Login</router-link>
-                    <router-link to="Register">Register</router-link>
-                </router-view>
-            </v-container>
-        </v-main>
-    </v-app>
+    <div>
+        <toolbar></toolbar>
+        <router-view>
+            <!-- <router-link to="home" >Home</router-link>
+            <router-link to="login">Login</router-link>
+            <router-link to="register">Register</router-link> -->
+        </router-view>
+        <app-footer></app-footer>
+    </div>
 </template>
+
 <script>
-export default {
-    name: "App"
-}
+    import toolbar  from '../components/partials/Toolbar'
+    import appFooter from '../components/partials/AppFooter'
+
+    export default{
+        name: "App",
+        components:
+        {
+            toolbar,
+            appFooter
+        }
+    }
 </script>
 
 <style scoped>

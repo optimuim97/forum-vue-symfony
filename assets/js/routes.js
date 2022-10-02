@@ -1,7 +1,8 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 import Home from './components/Home'
+import App from './views/App'
 import Login from './components/Login'
 import Register from './components/Register'
 import Forum from './components/Forum'
@@ -9,13 +10,18 @@ import Forum from './components/Forum'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  //  mode: 'history',
+    mode: 'history',
     routes:
     [
         {
             path: '/',
-            name: 'Home',
-            component: Home
+            name: './views/App',
+            component: App  
+        },
+        {
+            path: '/home',
+            name: './Home',
+            component: Home  
         },
         {
             path: '/login',
@@ -28,7 +34,7 @@ const router = new VueRouter({
             component: Register
         },
         {
-            path: '/forum',
+              path: '/forum',
             name: 'Forum',
             component: Forum
         }

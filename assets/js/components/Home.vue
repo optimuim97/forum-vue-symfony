@@ -1,8 +1,6 @@
 <template>
     <div>
         Home
-
-        {{quoteText}}
     </div>
 </template>
 <script>
@@ -10,8 +8,7 @@
         name: 'Home',
         data() {
             var data = {
-                quoteText: "The art of programming is the art of organizing complexity, of mastering multitude and avoiding its bastard chaos as effectively as possible.",
-                authorName: "Dezz",
+               
             };
             return data;
         }
