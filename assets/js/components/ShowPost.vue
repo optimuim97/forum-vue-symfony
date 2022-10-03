@@ -36,11 +36,15 @@
                         align="center"
                         justify="end"
                     >
-                    <v-icon class="mr-1">
+                    <v-icon class="mr-1" @click="like">
                         mdi-heart
                     </v-icon>
                     
-                    <span class="subheading mr-2">{{ data.comments.length }}</span>
+                    <span class="subheading mr-2">
+                        0
+                        <!-- {{ data.likes.length }} -->
+                    </span>
+                    
                     <span class="mr-1">·</span>
                     <v-icon class="mr-1">
                         mdi-message-text-outline
@@ -140,15 +144,22 @@
                 return this.data.author.username == localStorage.getItem('user')
             },
             addComment(){
-
                 this.form.id = this.data.id
-                // console.log(this.form)
 
                 axios.post('/api/v1/comment', this.form).then((result) => {
 
                     this.data.comments.push(result.data.data)
                     this.form = {}
 
+                }).catch((err) => {
+                    console.log(err)
+                });
+            },
+            like(){
+                axios.post(`/api/v1/like/${this.data.id}`).then((result) => {
+                    console.log(result)
+                    this.data.likes.push(result.data.data)
+                    
                 }).catch((err) => {
                     console.log(err)
                 });

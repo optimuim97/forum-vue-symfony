@@ -10,6 +10,14 @@ import mdiVue from 'mdi-vue/v2'
 import * as mdijs from '@mdi/js'
 import '@mdi/font/css/materialdesignicons.css'
 import '../../node_modules/nprogress/nprogress.css'
+import VueToastr from '@deveodk/vue-toastr'
+import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
+
+Vue.use(VueToastr,{
+    defaultPosition: 'toast-bottom-left',
+    defaultType: 'info',
+    defaultTimeout: 1000
+})
 
 Vue.use(require('vue-moment'));
 

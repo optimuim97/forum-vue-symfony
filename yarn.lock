@@ -926,6 +926,11 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     "to-fast-properties" "^2.0.0"
 
+"@deveodk/vue-toastr@^1.1.0":
+  "integrity" "sha512-G+VontfAl088m/9MDfJ/+BxDIYmXAHZglMz+VOMTFgp9aPMt88P1b3xlJxA43xsQBot2tmcwAjNVphYIibtFpQ=="
+  "resolved" "https://registry.npmjs.org/@deveodk/vue-toastr/-/vue-toastr-1.1.0.tgz"
+  "version" "1.1.0"
+
 "@discoveryjs/json-ext@^0.5.0":
   "integrity" "sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw=="
   "resolved" "https://registry.npmjs.org/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz"

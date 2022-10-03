@@ -53,12 +53,15 @@
             upatePost (){
                 axios.post('/api/v1/article/'+this.data.id,this.form).then((res) => {
                     EventBus.$emit('afterEdit')
+
+                    this.$toastr('success', 'Post edited', 'Good')
+
                 }).catch((err) => {
                     console.log(error.response)
                 });
             },
             cancel(){
-                // this.$router.push({path:'/api/v1/article/'+this.data.id})
+                EventBus.$emit('afterEdit')
             },
             getHTML(){
                 let html = this.$refs.toastuiEditor.invoke('getHTML');

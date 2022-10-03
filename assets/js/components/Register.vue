@@ -69,13 +69,16 @@ export default {
     methods: {
         register(){
             console.log(this.form)
-            axios.post('/api/register', this.form)
+            axios.post('/api/register',this.form)
             .then((res) => {
 
-                console.log('>>>>>')
-                console.log(res)
+                this.$toastr('info', 'Account Created', 'Good')
+
+
+                // console.log('>>>>>')
+                // console.log(res)
                 // User.responseAfterLogin(res)
-                this.$router.push( { name : 'Login' })
+                this.$router.push({path :`/login` })
 
                 // if(User.loggIn()){
                 // }else{
@@ -84,9 +87,7 @@ export default {
                 
             })
             .catch( (error) => {
-
-                console.log(error)
-                // this.errors = error.response.data.errors 
+                console.log(error.response )
             });
         }
     }

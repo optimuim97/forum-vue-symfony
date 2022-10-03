@@ -49,7 +49,7 @@
                         console.log(error)
                     });
 
-                }, 2000);
+                }, 5000);
             }
         },
         created(){            

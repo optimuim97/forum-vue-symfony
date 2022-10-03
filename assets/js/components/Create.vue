@@ -58,10 +58,15 @@
                 ).then((result) => {
                     console.log(result)
                     this.$router.push({path : `/forum` })
+
+                    this.$toastr('success', 'Post created', 'Good')
+
                     // this.$router.push({path : `${result.data.id}` })
                 }).catch((err) => {
                     
                     console.log(err)
+
+                    this.$toastr('error', 'Something ❌!', 'Error')
                     
                     // this.errors = err.data
                 });

@@ -35,9 +35,13 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Article::class)]
     private Collection $articles;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Likes::class)]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,13 +171,43 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function serialize()
+    // public function serialize()
+    // {
+    //     return serialize([
+    //         $this->id,
+    //         $this->email,
+    //         $this->username,
+    //     ]);
+    // }
+
+    // /**
+    //  * @return Collection<int, Likes>
+    //  */
+    // public function getLikes(): Collection
+    // {
+    //     return $this->likes;
+    // }
+
+    public function addLike(Likes $like): self
     {
-        return serialize([
-            $this->id,
-            $this->email,
-            $this->username,
-        ]);
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Likes $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
+
+        return $this;
     }
 
 }

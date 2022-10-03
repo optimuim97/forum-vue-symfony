@@ -16,6 +16,7 @@ class User {
         axios
             .post("api/login_check", data)
             .then((res) => {
+
                 console.log("login response...")
                 const access_token = res.data.token;
                 const username = username_;
@@ -36,6 +37,8 @@ class User {
                     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
                     window.axios.defaults.headers.common['Authorization'] = JWTToken;
 
+                    this.$toastr('success', 'You are logged', 'Good')
+
                 } else {
                     alert("User is not valid");
                     return false;
@@ -43,10 +46,7 @@ class User {
 
             })
             .catch((error) => (error) => {
-                alert("Error");
-                console.log(error.data);
-
-                return error.data;
+                this.$toastr('error', 'Authencation fail', '❌')
             });
     }
 

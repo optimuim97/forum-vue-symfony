@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Likes;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
 use DateTime;
@@ -133,6 +134,52 @@ class ArticleController extends AbstractController
             "message" => "Article delete!",
             "status" => "200",
             "data" => $article
+        ]);
+    }
+
+    #[Route('/api/v1/like/{id}', name: 'article_like', methods : ['POST'])]
+    public function likeOrDislike($id): Response
+    {
+        $article = $this->articlesRepository->find($id);
+        $user = $this->getUser();
+
+        if(!$article){
+            return $this->json([
+                "message" => "Article with id = $id doesn't exist!",
+                "status" => "401",
+                "data" => []
+            ]);
+            exit;
+        }
+
+        $article_likes = $article->getLikes();
+
+        foreach ($article_likes as $like) {
+            if($like->getUser()->getUsername() == $user->getUsername()){
+                $article->removeLike($like);
+
+                return $this->json([
+                    "message" => "dislike",
+                    "status" => Response::HTTP_NO_CONTENT,
+                    "data"=> $article
+                ]);
+            }
+        }
+
+        $like = new Likes();
+        $like->setUser($user)
+             ->setArticle($article);
+
+        // $article->addLike($like);
+
+        $this->em->persist($like);
+        $this->em->flush();
+       
+        return $this->json([
+            "message" => "like!",
+            "status" => Response::HTTP_OK,
+            "article" => $like,
+            "like" => $like
         ]);
     }
 

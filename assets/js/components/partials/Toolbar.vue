@@ -38,6 +38,8 @@
         created(){
           EventBus.$on('logout', () => {
               User.logout();
+              this.$toastr('info', 'You are logout', 'Good')
+
           }) 
           // ,
           EventBus.$on('login', () => {
