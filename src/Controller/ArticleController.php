@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +16,9 @@ class ArticleController extends AbstractController
 {
     
     private $em;
-    private $articleRepository;
-    public function __construct(ArticleRepository $articleRepository,UserRepository $authorRepo,EntityManagerInterface $em){
-        $this->articleRepository = $articleRepository;
+    private $articlesRepository;
+    public function __construct(ArticleRepository $articlesRepository,UserRepository $authorRepo,EntityManagerInterface $em){
+        $this->articlesRepository = $articlesRepository;
         $this->authorRepo = $authorRepo;
         $this->em = $em;
     }   
@@ -25,7 +26,7 @@ class ArticleController extends AbstractController
     #[Route('/api/v1/articles', name: 'app_articles', methods : ['GET'])]
     public function getArticles(): Response
     {
-        $articles = $this->articleRepository->findAll();
+        $articles = $this->articlesRepository->findAll();
         $length = count($articles);
        
         return $this->json([
@@ -39,12 +40,16 @@ class ArticleController extends AbstractController
     #[Route('/api/v1/article', name: 'app_create_article', methods : ['POST'])]
     public function createArticle(Request $request)
     {   
+        $data = json_decode($request->getContent());
+
         $author = $this->getUser();
        
         $article = new Article();
-        $article->setTitle($request->request->get('title'))  
-                ->setContent($request->request->get('content'))
-                ->setAuthor($author);
+        $article->setTitle($data->title)  
+                ->setContent($data->content)
+                ->setAuthor($author)
+                ->setCreatedAt(new DateTime())
+                ;
 
         $this->em->persist($article);
         $this->em->flush();

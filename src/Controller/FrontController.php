@@ -8,9 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FrontController extends AbstractController
 {
-    #[Route('/', name: 'app_front')]
+    /**
+     * @Route("/", name="home")
+     * @Route("/{route}", name="vue_pages", requirements={"route"="^(?!.*_wdt|_profiler).+"})
+     */
     public function index(): Response
     {
         return $this->render('app.html.twig');
     }
+
+  
+
 }

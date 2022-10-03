@@ -3,10 +3,32 @@ import App from './views/App';
 import Routes from './routes';
 import Vuetify from 'vuetify'
 import axios from 'axios';
+import User from "./utils/User.js"
+import AppStorage from "./utils/AppStorage.js"
+import { Editor } from '@toast-ui/vue-editor';
+import mdiVue from 'mdi-vue'
+import * as mdijs from '@mdi/js'
+import '@mdi/font/css/materialdesignicons.css'
+
+Vue.use(mdiVue, {
+    icons: mdijs
+}) 
+
 
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(axios)
+Vue.use(Editor)
+
+window.User = User
+window.AppStorage = AppStorage
+window.EventBus = new Vue();
+
+window.axios = require('axios');
+const JWTToken = `Bearer ${localStorage.getItem('token')}`
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Authorization'] = JWTToken;
 
 const app = new Vue({
     el: '#app',

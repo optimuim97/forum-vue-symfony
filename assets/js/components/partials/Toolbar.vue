@@ -7,7 +7,7 @@
     <v-toolbar>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title text="upper">AGNANINI</v-toolbar-title>
+      <v-toolbar-title text="upper">ForumApp</v-toolbar-title>
 
       <v-spacer></v-spacer>
           <div
@@ -28,18 +28,28 @@
         data(){
           return {
               items : [
-                { title : "Forum", to: '/forum', show : true },
-                // { title : "Pose ta Question", to: '/ask', show : User.loggIn() },
-                // { title : "Les Categories", to: '/category', show : ! ( User.loggIn() ) },
-                { title : "Se Connecté", to: '/login', show : true },
-                { title : "Déconnexion", to: '/logout', show : true }
+                { title : "Forum", to: '/forum', show : User.loggIn() },
+                { title : "Ajouter Article", to: '/create', show : User.loggIn() },
+                { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) },
+                { title : "Déconnexion", to: '/logout', show : User.loggIn() }
               ]
           }
         },
         created(){
-          // EventBus.$on('logout', () => {
-          //     User.logout();
-          // }) 
+          EventBus.$on('logout', () => {
+              User.logout();
+          }) 
+          // ,
+          EventBus.$on('login', () => {
+            this.$router.push({path: '/forum' })
+
+            this.items = [
+              { title : "Forum", to: '/forum', show : User.loggIn() },
+              { title : "Ajouter Article", to: '/create', show : User.loggIn() },
+              { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) },
+              { title : "Déconnexion", to: '/logout', show : User.loggIn() }
+            ]
+          })
         }
     }
 </script>

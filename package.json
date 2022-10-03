@@ -3,6 +3,7 @@
         "@babel/core": "^7.19.3",
         "@babel/node": "^7.19.1",
         "@babel/preset-env": "^7.19.3",
+        "@mdi/font": "^7.0.96",
         "@symfony/webpack-encore": "4.0.0",
         "axios": "^0.19.2",
         "core-js": "3.25.1",
@@ -27,6 +28,9 @@
         "build": "./node_modules/@symfony/webpack-encore/bin/encore.js production"
     },
     "dependencies": {
+        "@mdi/js": "^7.0.96",
+        "@toast-ui/vue-editor": "^3.1.10",
+        "mdi-vue": "^3.0.13",
         "vue": "2.7",
         "vue-axios": "^3.4.1",
         "vue-router": "^3",

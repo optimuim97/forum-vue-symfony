@@ -75,10 +75,9 @@ export default {
                 console.log('>>>>>')
                 console.log(res)
                 // User.responseAfterLogin(res)
-                console.log('>>>>>')
+                this.$router.push( { name : 'Login' })
 
                 // if(User.loggIn()){
-                //     this.$router.push( { name : 'forum' })
                 // }else{
                 //     console.log('Une erreur est survenue ...')
                 // }

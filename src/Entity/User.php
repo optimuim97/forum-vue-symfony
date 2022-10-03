@@ -75,6 +75,7 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
         return (string) $this->username;
     }
 
+
     /**
      * @see UserInterface
      */
@@ -139,10 +140,10 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Article>
      */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
+    // public function getArticles(): Collection
+    // {
+    //     return $this->articles;
+    // }
 
     public function addArticle(Article $article): self
     {
@@ -171,8 +172,7 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
         return serialize([
             $this->id,
             $this->email,
-            $this->email,
-            $this->password,
+            $this->username,
         ]);
     }
 

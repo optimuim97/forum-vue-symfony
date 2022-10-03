@@ -1,9 +1,10 @@
 <template>
    <v-container fluid>
         <v-layout row wrap>
-            <v-flex xs8>
-                Forum
-                <!-- <question  v-for="question in questions" :key="question.path" :question='question'></question> -->
+            <v-flex>
+                <div>
+                    <post v-for="article in articles" :key="article.createdAt"  :article='article'></post>
+                </div>
             </v-flex>            
         </v-layout>
    </v-container>
@@ -11,32 +12,33 @@
 
 
 <script>
-    // import question from './question'
+    import Post from './Post'
 
-    // export default {
-    //     components : {question},
-    //     data (){
-    //         return {
-    //             questions : {}
-    //         }
-    //     },
-    //     created(){
+    export default {
+        components : {Post},
+        data (){
+            return {
+                articles : {}
+            }
+        },
+        created(){
 
-    //         if(User.loggIn()){
-    //             axios.get('/api/question').then((result) => {
+            setTimeout(() => {
+                if(User.loggIn()){
+                    axios.get('/api/v1/articles').then((result) => {
+                            this.articles = result.data.data
+
+                            console.log(this.articles)
                     
-    //                 if(result.status == 200){
-    //                     this.questions = result.data.data
-    //                 }else{
-    //                     alert('error')
-    //                 }
-                    
-    //             }).catch((err) => {
-    //                 console.log(error)
-    //             });
-    //         }else{
-    //             this.$router.push({name:'login'})
-    //         }
-    //     }
-    // }
+                    }).catch((err) => {
+                        console.log(error)
+                });
+            }else{
+                this.$router.push({name:'login'})
+            }
+            }, 5000);
+
+          
+        }
+    }
 </script>

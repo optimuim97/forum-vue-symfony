@@ -35,6 +35,7 @@
 
 <script>
     export default {
+
         data(){
             return {
                 form : {
@@ -46,12 +47,11 @@
         methods : {
             login (){
                 User.login(this.form) 
-                // this.$router.push({name: 'forum' })
             }
         },
         created(){
             if(User.loggIn()){
-                this.$router.push({name: 'forum' })
+                this.$router.push({name: 'Forum' })
             }
         }
     }

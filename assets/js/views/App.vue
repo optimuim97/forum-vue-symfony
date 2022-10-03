@@ -1,11 +1,8 @@
 <template>
     <div>
         <toolbar></toolbar>
-        <router-view>
-            <!-- <router-link to="home" >Home</router-link>
-            <router-link to="login">Login</router-link>
-            <router-link to="register">Register</router-link> -->
-        </router-view>
+            <router-view>
+            </router-view>
         <app-footer></app-footer>
     </div>
 </template>
@@ -20,7 +17,8 @@
         {
             toolbar,
             appFooter
-        }
+        },
+
     }
 </script>
 
