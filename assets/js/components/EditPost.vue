@@ -10,16 +10,6 @@
                 id="title"
                 v-model="form.title"
             ></v-text-field>
-
-            <v-select
-                :items="categories"
-                item-text="name"
-                item-value="id"
-                item-id="id"
-                v-model="question_data.id"
-                label="Category"
-            >
-            </v-select>    
         
 
             <editor 

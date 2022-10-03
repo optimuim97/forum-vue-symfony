@@ -26,7 +26,7 @@ class ArticleController extends AbstractController
     #[Route('/api/v1/articles', name: 'app_articles', methods : ['GET'])]
     public function getArticles(): Response
     {
-        $articles = $this->articlesRepository->findAll();
+        $articles = $this->articlesRepository->orderByCreatedAt();
         $length = count($articles);
        
         return $this->json([

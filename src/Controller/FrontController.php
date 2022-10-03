@@ -17,6 +17,15 @@ class FrontController extends AbstractController
         return $this->render('app.html.twig');
     }
 
+    /**
+     * @Route("/", name="home_front")
+     * @Route("/{route}/{route1}/{route2}/{route3}", name="details_pages", requirements={"route"="^(?!.*_wdt|_profiler).+"})
+     */
+    public function details(): Response
+    {
+        return $this->render('app.html.twig');
+    }
+
   
 
 }

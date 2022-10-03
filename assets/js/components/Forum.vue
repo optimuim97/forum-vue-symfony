@@ -21,24 +21,43 @@
                 articles : {}
             }
         },
-        created(){
+        async serverPrefetch() {
+            this.data = await getArticle()
+        },
+        methods: {
+            getArticle(){
 
-            setTimeout(() => {
-                if(User.loggIn()){
-                    axios.get('/api/v1/articles').then((result) => {
-                            this.articles = result.data.data
+                setTimeout(() => {
 
-                            console.log(this.articles)
+                    const JWTToken = `Bearer ${localStorage.getItem('token')}`
                     
-                    }).catch((err) => {
+                    if(!User.loggIn()){
+                        this.$router.push({name:'login'});
+                    }
+               
+                    axios.get('/api/v1/articles', 
+                    {
+                        headers: {
+                            Authorization: JWTToken
+                        }
+                    }
+                    ).then((result) => {
+                        this.articles = result.data.data
+                        console.log(this.articles)
+                    }
+                    ).catch((err) => {
                         console.log(error)
-                });
-            }else{
-                this.$router.push({name:'login'})
-            }
-            }, 5000);
+                    });
 
-          
+                }, 5000);
+            }
+        },
+        created(){            
+            if(this.getArticle()){
+                async () => {
+                    this.data = await getArticle()
+                } 
+            }
         }
     }
 </script>

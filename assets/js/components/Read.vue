@@ -24,7 +24,7 @@
         },
         created(){
             this.listen(),
-            this.getQuestion()
+            this.getArticle()
         },
         methods : {
             listen (){
@@ -32,7 +32,7 @@
                     this.editing = true
                 })
             },
-            getQuestion (){
+            getArticle (){
                 const article_id = this.$route.params.id
 
                  axios.get("/api/v1/article/" + article_id).then((result) => {

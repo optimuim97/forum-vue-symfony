@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,6 +49,7 @@ class CommentController extends AbstractController
         $comment = new Comment();
         $comment->setComment($request->request->get('comment'))  
                 ->setUser($this->getUser())
+                ->setCreatedAt(new DateTime())
                 ->setArticle($article);
         
         $article->addComment($comment);

@@ -4,7 +4,7 @@
       class="text-center"
       cols="12"
     >
-      {{ new Date().getFullYear() }} — <strong>AGNANINI</strong>
+      {{ new Date().getFullYear() }} — <strong>ForumApp</strong>
     </v-col>
   </v-footer>
 </template>

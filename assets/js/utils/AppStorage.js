@@ -33,6 +33,9 @@ class AppStorage{
 
     getUser(){
         user = localStorage.getItem('user')
+
+        alert(user)
+        
         return user;
     }
 

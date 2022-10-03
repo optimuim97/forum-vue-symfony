@@ -6,7 +6,9 @@
             </router-link>         
         </v-card-title>
 
-        <v-card-subtitle> {{ article.createdAt }}</v-card-subtitle>
+        <v-card-subtitle> 
+            <span>{{ article.createdAt | moment("dddd, MMMM Do YYYY") }}</span>         
+        </v-card-subtitle>
 
         <v-card-text v-html="article.content">
         

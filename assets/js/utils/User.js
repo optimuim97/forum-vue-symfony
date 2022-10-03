@@ -25,7 +25,6 @@ class User {
                 console.log(">>>>>UserName<<<<", ">>>>>Access Token<<<<<")
                 console.log(username_, access_token)
                 
-                
                 if (Token.isValid(access_token)) {
                     AppStorage.storeData(username, access_token);
                     EventBus.$emit('login')       
@@ -73,6 +72,14 @@ class User {
         }
     }
 
+    user(){
+        if (this.loggIn()) {
+            return AppStorage.getUser()
+        } else {
+            alert("User is not loggin");
+        }
+    }
+
     id() {
         if (this.loggIn()) {
             const token = AppStorage.getToken();
@@ -86,8 +93,8 @@ class User {
         }
     }
 
-    own(user_id){
-        return this.id() == user_id
+    own(username){
+        return this.user() == username
     }
 }
 

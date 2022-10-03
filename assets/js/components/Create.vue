@@ -57,7 +57,7 @@
                      }
                 ).then((result) => {
                     console.log(result)
-                    this.$router.push({path : `/api/v1/articles` })
+                    this.$router.push({path : `/forum` })
                     // this.$router.push({path : `${result.data.id}` })
                 }).catch((err) => {
                     

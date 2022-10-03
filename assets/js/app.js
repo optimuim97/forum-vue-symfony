@@ -6,9 +6,12 @@ import axios from 'axios';
 import User from "./utils/User.js"
 import AppStorage from "./utils/AppStorage.js"
 import { Editor } from '@toast-ui/vue-editor';
-import mdiVue from 'mdi-vue'
+import mdiVue from 'mdi-vue/v2'
 import * as mdijs from '@mdi/js'
 import '@mdi/font/css/materialdesignicons.css'
+import '../../node_modules/nprogress/nprogress.css'
+
+Vue.use(require('vue-moment'));
 
 Vue.use(mdiVue, {
     icons: mdijs
@@ -20,8 +23,8 @@ Vue.use(Vuetify)
 Vue.use(axios)
 Vue.use(Editor)
 
-window.User = User
-window.AppStorage = AppStorage
+window.User = User;
+window.Storage = AppStorage
 window.EventBus = new Vue();
 
 window.axios = require('axios');
@@ -29,6 +32,8 @@ const JWTToken = `Bearer ${localStorage.getItem('token')}`
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Authorization'] = JWTToken;
+
+localStorage.getItem('user')
 
 const app = new Vue({
     el: '#app',
