@@ -52,9 +52,9 @@
                             <v-icon color="orange" @click="edit">mdi-pencil</v-icon>
                         </v-btn>
 
-                        <v-btn icon>
-                            <v-icon color="red" @click="deleteQuestion">mdi-delete</v-icon>
-                        </v-btn>
+                        <!-- <v-btn icon>
+                            <v-icon color="red" @click="deleteArticle">mdi-delete</v-icon>
+                        </v-btn> -->
                     </div>
                 
                 </v-row>
@@ -62,60 +62,76 @@
                
                 </v-list-item>
             </v-card-actions>
+
+
+            <div>
+                <comment-list :comments_list="data.comments"></comment-list>
+            </div>
+
         </v-card>
 
         <v-spacer></v-spacer>
 
         <v-content class="mt-4">     
-            <v-form>
+            <v-form  @submit.prevent="addComment">
             <v-container>
                 <v-row>
-                
-                    <v-col cols="12">
+                    <v-col cols="8">
                         <v-text-field
-                            v-model="message"
+                            v-model="form.comment"
                             filled
                             clear-icon="mdi-close-circle"
                             clearable
                             label="Add Comment"
                             type="text"
-
-                            @click.prevent="addComment"
                         >
                         </v-text-field>
+
+                        
                     </v-col>
 
+                    <v-col cols="4">
+                        <v-btn class="py-3" color="success" type="submit"> Comment </v-btn>
+                    </v-col>
+
+                    
                 </v-row>
             </v-container>
             </v-form>
-        </v-content>
 
-        <v-divider></v-divider>
+            <v-divider></v-divider>
+        </v-content>  
 
-
-        <comment-list :comments_list="data.comments"></comment-list>
-        
-        
     </v-container>
 </template>
 
 
 <script>
-    import commentList from "./CommentList";
+    import CommentList from "./CommentList.vue";
 
     export default {
         props : ['data'],
         components : {
-            commentList
+            CommentList
         },
+        data() {
+            return {
+                form:{
+                    comment: null,
+                    id : null
+                },
+
+            }
+        },  
         methods : {
             edit(){
                 EventBus.$emit('startEditing')
             },  
-            deleteQuestion(){
-                
+            deleteArticle(){
                 axios.delete(`/api/v1/article/${this.data.id}`).then((result) => {
+
                     this.$router.push('/forum')
+
                 }).catch((err) => {
                     console.log(err)
                 });
@@ -125,18 +141,20 @@
             },
             addComment(){
 
-            }
-        },
-        data() {
-            return {
-                message : null
+                this.form.id = this.data.id
+                // console.log(this.form)
+
+                axios.post('/api/v1/comment', this.form).then((result) => {
+
+                    this.data.comments.push(result.data.data)
+                    this.form = {}
+
+                }).catch((err) => {
+                    console.log(err)
+                });
             }
         },
         created(){
-
-            console.log("<<<<own>>>>")
-            console.log(this.own())
-
             this.own()
         }
     }

@@ -1,7 +1,7 @@
 <template>
-     <v-container grid-list-xs>
-        <comment v-for="comment in comments_list" :key="comment.id" :data="comment"></comment>
-    </v-container>
+    <div>  
+        <comment v-for="comment in comments_list" :key="comment.id" :comment="comment"></comment>
+    </div>
 </template>
 
 <script>

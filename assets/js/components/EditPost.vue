@@ -44,29 +44,21 @@
                 form : {
                     title : null,
                     content : null
-                },
-                categories : null
+                }
             }
         }, 
         components : {Editor},
-        props : ['question_data'],
+        props : ['data'],
         methods : {
             upatePost (){
-                console.log("form datas =>")
-                console.log(this.form)
-                axios.put('/api/v1/article/'+this.question_data.id,this.form).then((res) => {
-                    
-                    console.log("check result")
-
-                    console.log(res)
+                axios.post('/api/v1/article/'+this.data.id,this.form).then((res) => {
+                    EventBus.$emit('afterEdit')
                 }).catch((err) => {
                     console.log(error.response)
                 });
             },
             cancel(){
-                console.log(this.form);
-                url = this.question.url
-                console.log(url)
+                // this.$router.push({path:'/api/v1/article/'+this.data.id})
             },
             getHTML(){
                 let html = this.$refs.toastuiEditor.invoke('getHTML');
@@ -74,7 +66,7 @@
             }
         },
         created(){
-            this.form = this.question_data
+            this.form = this.data
         }
     }
 </script>

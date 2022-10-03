@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="editing">
-            <edit-question :question_data="article"></edit-question>
+            <edit-post :data="article"></edit-post>
         </div>
 
         <div v-if="!editing">
@@ -23,23 +23,46 @@
             }
         },
         created(){
-            this.listen(),
+            this.listen()
+        },
+        mounted() {
             this.getArticle()
         },
         methods : {
             listen (){
                 EventBus.$on('startEditing', () => {
                     this.editing = true
+                }),
+                EventBus.$on('afterEdit', () => {
+                    this.editing = false
                 })
+
             },
             getArticle (){
+
+             setTimeout(() => {
                 const article_id = this.$route.params.id
 
-                 axios.get("/api/v1/article/" + article_id).then((result) => {
+                const JWTToken = `Bearer ${localStorage.getItem('token')}`
+                
+                if(!User.loggIn()){
+                    this.$router.push({name:'login'});
+                }
+               
+                axios.get("/api/v1/article/" + article_id,
+                {
+                    headers: {
+                        Authorization: JWTToken
+                    }
+                }
+                ).then((result) => {
                     this.article  = result.data.data
                 }).catch((err) => {
                     console.log(err)
                 });
+
+              }, 1500);
+
             }
         }
     }

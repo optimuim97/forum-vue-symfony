@@ -32,6 +32,7 @@ const JWTToken = `Bearer ${localStorage.getItem('token')}`
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Authorization'] = JWTToken;
+// axios.defaults.headers.common['content-type'] = 'application/json';
 
 localStorage.getItem('user')
 

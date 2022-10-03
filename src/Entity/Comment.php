@@ -21,7 +21,7 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?Article $article = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(cascade: ['persist', 'remove'])]
     private ?User $User = null;
 
     public function getId(): ?int

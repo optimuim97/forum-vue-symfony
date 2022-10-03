@@ -25,7 +25,7 @@
             this.data = await getArticle()
         },
         methods: {
-            getArticle(){
+            getArticles(){
 
                 setTimeout(() => {
 
@@ -49,13 +49,13 @@
                         console.log(error)
                     });
 
-                }, 5000);
+                }, 2000);
             }
         },
         created(){            
-            if(this.getArticle()){
+            if(this.getArticles()){
                 async () => {
-                    this.data = await getArticle()
+                    this.data = await getArticles()
                 } 
             }
         }

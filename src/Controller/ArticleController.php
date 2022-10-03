@@ -87,6 +87,8 @@ class ArticleController extends AbstractController
     public function update($id, Request $request): Response
     {   
         $article = $this->articlesRepository->find($id);
+        $data = json_decode($request->getContent(),true);
+
         if(!$article){
             return $this->json([
                 "message" => "Article with id = $id doesn't exist!",
@@ -96,8 +98,11 @@ class ArticleController extends AbstractController
             exit;
         }
 
-        serialize($article);
+        $article->setTitle($data['title'])  
+                ->setContent($data['content'])
+                ->setUpdatedAt(new DateTime());
 
+        $this->em->persist($article);
         $this->em->flush();
 
         return $this->json([
