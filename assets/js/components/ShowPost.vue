@@ -41,8 +41,7 @@
                     </v-icon>
                     
                     <span class="subheading mr-2">
-                        0
-                        <!-- {{ data.likes.length }} -->
+                        {{ data.likes.length }}
                     </span>
                     
                     <span class="mr-1">·</span>
@@ -56,9 +55,9 @@
                             <v-icon color="orange" @click="edit">mdi-pencil</v-icon>
                         </v-btn>
 
-                        <!-- <v-btn icon>
+                        <v-btn icon>
                             <v-icon color="red" @click="deleteArticle">mdi-delete</v-icon>
-                        </v-btn> -->
+                        </v-btn>
                     </div>
                 
                 </v-row>
@@ -134,6 +133,11 @@
             deleteArticle(){
                 axios.delete(`/api/v1/article/${this.data.id}`).then((result) => {
 
+                    console.log(">>>>>>>>>>>>>>")
+                    console.log(result)
+
+                    this.$toastr('info', 'Article deleted ❌!', 'Error')
+
                     this.$router.push('/forum')
 
                 }).catch((err) => {
@@ -158,7 +162,7 @@
             like(){
                 axios.post(`/api/v1/like/${this.data.id}`).then((result) => {
                     console.log(result)
-                    this.data.likes.push(result.data.data)
+                    this.data.likes.push(result.data.like)
                     
                 }).catch((err) => {
                     console.log(err)

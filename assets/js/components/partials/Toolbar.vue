@@ -2,8 +2,6 @@
   <v-card
     tile
   >
-  <div>
-  </div>
     <v-toolbar>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

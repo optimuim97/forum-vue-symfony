@@ -1,7 +1,7 @@
 <template>
    <v-container grid-list-xs>
 
-        <h1> Ajouter une Question </h1>
+        <h1> Ajouter un Article </h1>
 
         <v-form @submit.prevent="addArticle">
             <v-text-field
@@ -20,7 +20,7 @@
                 getHTML
             />
 
-            <div>
+            <div class="btn-success">
                 <v-btn color="success" type="submit">Ajouter</v-btn>
             </div>
         </v-form>
@@ -56,19 +56,17 @@
                         }
                      }
                 ).then((result) => {
+                    
                     console.log(result)
                     this.$router.push({path : `/forum` })
 
                     this.$toastr('success', 'Post created', 'Good')
 
-                    // this.$router.push({path : `${result.data.id}` })
                 }).catch((err) => {
-                    
-                    console.log(err)
 
+                    console.log(err)
                     this.$toastr('error', 'Something ❌!', 'Error')
-                    
-                    // this.errors = err.data
+
                 });
             },
             getHTML() {
@@ -82,3 +80,9 @@
       
     }
 </script>
+
+<style scoped>
+    .btn-success{
+        margin-top : 20px;
+    }
+</style>

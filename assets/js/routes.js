@@ -1,22 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import App from './views/App'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import Register from './components/Register'
 import Forum from './components/Forum'
 import Create from './components/Create'
 import Read from './components/Read'
-import EditPost from './components/EditPost'
 import NProgress from 'nprogress';
 
-
-Vue.use(VueRouter)
-
 const router = new VueRouter({
-    hashbang:true,
-    mode: 'history',
+    // hashbang:true,
+    // mode: 'history',
     routes:
     [
         {
@@ -58,19 +53,23 @@ const router = new VueRouter({
     ]
 })
 
+Vue.use(VueRouter)
+
 router.beforeResolve((to, from, next) => {
-// If this isn't an initial page load.
-if (to.name) {
-    // Start the route progress bar.
-    NProgress.start()
-}
-next()
-})
+    // If this isn't an initial page load.
+    if (to.name) {
+        // Start the route progress bar.
+        NProgress.start()
+    }
+    next()
+    }
+)
 
 router.afterEach(() => {
-// Complete the animation of the route progress bar.
-NProgress.done()
-})
+        // Complete the animation of the route progress bar.
+        NProgress.done()
+    }
+)
   
 
 export default router

@@ -1,24 +1,25 @@
 <template>
     <v-app>
-        <toolbar></toolbar>
-            <router-view>
+        <toolbar></toolbar> 
+             <router-view>
             </router-view>
-        <app-footer></app-footer>
+        <app-footer></app-footer> 
     </v-app>
 </template>
 
 <script>
     import toolbar  from '../components/partials/Toolbar'
     import appFooter from '../components/partials/AppFooter'
+    import login from '../components/Login'
 
-    export default{
+    export default {
         name: "App",
         components:
         {
             toolbar,
-            appFooter
-        },
-
+            appFooter,
+            login
+        }
     }
 </script>
 

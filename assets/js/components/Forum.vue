@@ -3,7 +3,11 @@
         <v-layout row wrap>
             <v-flex>
                 <div>
-                    <post v-for="article in articles" :key="article.createdAt"  :article='article'></post>
+                    <v-card class="p-4" v-if="articles.length == 0">
+                        <p class="text-h5 font-weight-bold text-lg-center py-11"> Pas d'articles disponibles </p>
+                    </v-card>
+
+                    <post v-else v-for="article in articles" :key="article.createdAt"  :article='article'></post>
                 </div>
             </v-flex>            
         </v-layout>
@@ -18,7 +22,7 @@
         components : {Post},
         data (){
             return {
-                articles : {}
+                articles : null
             }
         },
         async serverPrefetch() {
@@ -44,12 +48,13 @@
                     ).then((result) => {
                         this.articles = result.data.data
                         console.log(this.articles)
+                        console.log(this.articles.length)
                     }
                     ).catch((err) => {
                         console.log(error)
                     });
 
-                }, 5000);
+                }, 2000);
             }
         },
         created(){            

@@ -14,14 +14,10 @@
             
             </v-card-title>
 
-
             <div class="d-flex justify-content-center">
                 <v-list-item-title class="ml-3"> Published by {{article.author.username}}</v-list-item-title>
             </div> 
         </v-card-subtitle>
-
-
-            
             
     </v-card>
 </template>

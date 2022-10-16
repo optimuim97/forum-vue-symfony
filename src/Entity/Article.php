@@ -2,16 +2,12 @@
 
 namespace App\Entity;
 
-// use ApiPlatform\Core\Annotation\ApiResource as AnnotationApiResource;
-use Gedmo\Mapping\Annotation as Gedmo;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
-// #[AnnotationApiResource()]
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
 {
@@ -20,7 +16,6 @@ class Article
 
     #[ORM\Column(length: 180)]
     private ?string $title = null;
-
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
@@ -31,9 +26,9 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
     private Collection $comments;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Likes::class)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Like::class)]
     private Collection $likes;
-
+   
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -112,33 +107,30 @@ class Article
         return $this;
     }
 
-    // /**
-    //  * @return Collection<int, Likes>
-    //  */
-    // public function getLikes(): Collection
-    // {
-    //     return $this->likes;
-    // }
 
-    public function addLike(Likes $like): self
+    public function addLike(Like $like): self
     {
         if (!$this->likes->contains($like)) {
             $this->likes->add($like);
-            $like->setArticle($this);
         }
 
         return $this;
     }
 
-    public function removeLike(Likes $like): self
+    public function removeLike(Like $like): self
     {
-        if ($this->likes->removeElement($like)) {
-            // set the owning side to null (unless already changed)
-            if ($like->getArticle() === $this) {
-                $like->setArticle(null);
-            }
-        }
+        $this->likes->removeElement($like);
+        $like->setArticle(null);
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes() : Collection
+    {
+        return $this->likes;
+    }
+
 }

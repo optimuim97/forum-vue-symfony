@@ -18,7 +18,8 @@ class Comment
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\ManyToOne(inversedBy: 'comments', targetEntity:Article::class)]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?Article $article = null;
 
     #[ORM\ManyToOne(cascade: ['persist', 'remove'])]
@@ -41,18 +42,6 @@ class Comment
         return $this;
     }
 
-    // public function getArticle(): ?Article
-    // {
-    //     return $this->article;
-    // }
-
-    public function setArticle(?Article $article): self
-    {
-        $this->article = $article;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->User;
@@ -61,6 +50,14 @@ class Comment
     public function setUser(?User $User): self
     {
         $this->User = $User;
+
+        return $this;
+    }
+
+
+    public function setArticle(?Article $article)  
+    {
+        $this->article = $article;
 
         return $this;
     }
