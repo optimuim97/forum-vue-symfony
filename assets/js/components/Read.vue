@@ -40,7 +40,7 @@
             },
             getArticle (){
 
-             setTimeout(() => {
+        
                 const article_id = this.$route.params.id
 
                 const JWTToken = `Bearer ${localStorage.getItem('token')}`
@@ -48,6 +48,8 @@
                 if(!User.loggIn()){
                     this.$router.push({name:'login'});
                 }
+
+                this.$loading(true)
                
                 axios.get("/api/v1/article/" + article_id,
                 {
@@ -59,9 +61,11 @@
                     this.article  = result.data.data
                 }).catch((err) => {
                     console.log(err)
+                }).finally(()=>{
+                    this.$loading(false)
                 });
 
-              }, 1500);
+           
 
             }
         }

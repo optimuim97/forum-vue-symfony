@@ -50,6 +50,8 @@
             }
         },
         created(){
+            this.$loading(false)
+            
             if(User.loggIn()){
                 this.$router.push({name: 'Forum' })
             }

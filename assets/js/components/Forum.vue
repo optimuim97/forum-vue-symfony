@@ -31,14 +31,14 @@
         methods: {
             getArticles(){
 
-                setTimeout(() => {
-
                     const JWTToken = `Bearer ${localStorage.getItem('token')}`
                     
                     if(!User.loggIn()){
                         this.$router.push({name:'login'});
                     }
                
+                    this.$loading(true)
+
                     axios.get('/api/v1/articles', 
                     {
                         headers: {
@@ -48,13 +48,21 @@
                     ).then((result) => {
                         this.articles = result.data.data
                         console.log(this.articles)
-                        console.log(this.articles.length)
                     }
                     ).catch((err) => {
-                        console.log(error)
-                    });
 
-                }, 2000);
+                        console.log(err.response.data)
+
+                        if(err.response.data != undefined){
+                            if(err.response.data.code == 401){
+                                console.log('>>>>>>>Before logout')
+                                EventBus.$emit('logout')
+                            }
+                        }
+                    }).finally(()=>{
+                        this.$loading(false)
+                    });
+                
             }
         },
         created(){            

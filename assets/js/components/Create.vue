@@ -73,11 +73,7 @@
                 let html = this.$refs.toastuiEditor.invoke('getHTML');
                 this.form.content = html
             }   
-        },
-        created(){
-            
-        },
-      
+        }
     }
 </script>
 

@@ -122,8 +122,7 @@
                 form:{
                     comment: null,
                     id : null
-                },
-
+                }
             }
         },  
         methods : {
@@ -163,6 +162,7 @@
                 axios.post(`/api/v1/like/${this.data.id}`).then((result) => {
                     console.log(result)
                     this.data.likes.push(result.data.like)
+                    console.log(result.data.article.lenght)
                     
                 }).catch((err) => {
                     console.log(err)

@@ -15,12 +15,6 @@ const router = new VueRouter({
     routes:
     [
         {
-            path: '/',
-            // name: './views/App',
-            // component: App  ,
-            name: 'Login'
-        },
-        {
             path: '/login',
             name: 'Login',
             component: Login

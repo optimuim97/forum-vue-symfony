@@ -32,12 +32,18 @@ class ArticleService extends UtilsClass{
         
         $length = count($articles);
 
-        return $this->json([
-            "message" => "All articles in database",
-            "status" => "200",
-            "length" => $length,
-            "data" => $articles
-        ]);
+        try {
+            return $this->json([
+                "message" => "All articles in database",
+                "status" => Response::HTTP_OK,
+                "length" => $length,
+                "data" => $articles
+            ]);
+        } catch (\Throwable $th) {
+            return $this->json([
+                "message" => $th
+            ]);
+        }
 
     }
 
@@ -48,7 +54,7 @@ class ArticleService extends UtilsClass{
         if(!$article){
             return $this->json([
                 "message" => "Article with id = $id doesn't exist!",
-                "status" => "401",
+                "status" => Response::HTTP_NOT_FOUND,
                 "data" => []
             ]);
             exit;
@@ -57,7 +63,7 @@ class ArticleService extends UtilsClass{
         // serialize($article);
         return $this->json([
             "message" => "Article exist!",
-            "status" => "200",
+            "status" => Response::HTTP_OK,
             "data" => $article
         ]);
 
@@ -95,7 +101,7 @@ class ArticleService extends UtilsClass{
 
         return $this->json([
             "message" => "New article created!",
-            "status" => "201",
+            "status" => Response::HTTP_CREATED,
             "data" => $article
         ]);
 
@@ -108,7 +114,7 @@ class ArticleService extends UtilsClass{
         if(!$article){
             return $this->json([
                 "message" => "Article with id = $id doesn't exist!",
-                "status" => "401",
+                "status" => Response::HTTP_UNAUTHORIZED,
                 "data" => []
             ]);
             exit;
@@ -123,7 +129,7 @@ class ArticleService extends UtilsClass{
 
         return $this->json([
             "message" => "Article updated!",
-            "status" => "201",
+            "status" => Response::HTTP_UNAUTHORIZED,
             "data" => $article
         ]);
     }
@@ -134,7 +140,7 @@ class ArticleService extends UtilsClass{
         if(!$article){
             return $this->json([
                 "message" => "Article with id = $id doesn't exist!",
-                "status" => "401",
+                "status" => Response::HTTP_UNAUTHORIZED,
                 "data" => []
             ]);
             exit;
@@ -145,7 +151,7 @@ class ArticleService extends UtilsClass{
        
         return $this->json([
             "message" => "Article delete!",
-            "status" => "200",
+            "status" => Response::HTTP_OK,
             "data" => $article
         ]);
     }

@@ -1,7 +1,6 @@
 <template>
-  <v-footer padless>
+  <v-footer padless id="footer">
     <v-col
-      class="text-center"
       cols="12"
     >
       {{ new Date().getFullYear() }} — <strong>ForumApp</strong>
@@ -12,3 +11,11 @@
 <script>
 
 </script>
+
+<style scoped>
+  #footer {
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+  }
+</style>
