@@ -21,7 +21,7 @@
             />
 
             <div class="btn-success">
-                <v-btn color="success" type="submit">Ajouter</v-btn>
+                <v-btn color="primary" type="submit">Ajouter</v-btn>
             </div>
         </v-form>
     
@@ -60,12 +60,13 @@
                     console.log(result)
                     this.$router.push({path : `/forum` })
 
-                    this.$toastr('success', 'Post created', 'Good')
+                    this.$toastr('success', 'Article ajouté', 'Super ✔️')
 
                 }).catch((err) => {
 
-                    console.log(err)
-                    this.$toastr('error', 'Something ❌!', 'Error')
+                    console.log(err.response)
+
+                    this.$toastr('error', 'Une erreur est survenue ❌!', 'OOps 😑')
 
                 });
             },

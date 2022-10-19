@@ -7,13 +7,19 @@ import Register from './components/Register'
 import Forum from './components/Forum'
 import Create from './components/Create'
 import Read from './components/Read'
+import Profil from './components/profil/Profil'
 import NProgress from 'nprogress';
 
 const router = new VueRouter({
     // hashbang:true,
-    // mode: 'history',
+    mode: 'history',
     routes:
     [
+        {
+            path: '/',
+            name: 'Login',
+            component: Login
+        },
         {
             path: '/login',
             name: 'Login',
@@ -42,6 +48,10 @@ const router = new VueRouter({
         {
             path: '/logout',
             component: Logout
+        },
+        {
+            path: '/profil',
+            component: Profil
         },
 
     ]

@@ -15,7 +15,7 @@
             </v-card-title>
 
             <div class="d-flex justify-content-center">
-                <v-list-item-title class="ml-3"> Published by {{article.author.username}}</v-list-item-title>
+                <v-list-item-title class="ml-3"> Publié par <span class="text-h6">  {{ article.author.username }} </span> </v-list-item-title>
             </div> 
         </v-card-subtitle>
             

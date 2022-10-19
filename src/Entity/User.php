@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -18,9 +18,11 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     use Timestapable;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotNull(message:"Ce Champ ne doit pas être vide")]
     private ?string $email = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotNull(message:"Ce Champ ne doit pas être vide")]
     private ?string $username = null;
 
     #[ORM\Column]
@@ -30,6 +32,7 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotNull(message:"Ce Champ ne doit pas être vide")]
     private ?string $password = null;
 
     public function __construct()

@@ -46,7 +46,7 @@ class User {
 
             })
             .catch((error) => (error) => {
-                this.$toastr('error', 'Authencation fail', '❌')
+                this.$toastr('error', 'Email ou mot de passe incorrect ...', '❌')
             });
     }
 
@@ -70,7 +70,7 @@ class User {
 
     logout() {
         AppStorage.clear();
-        window.location = "/login";
+        window.location = "/";
     }
 
     name() {

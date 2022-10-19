@@ -19,8 +19,7 @@ import VueLoading from 'vuejs-loading-plugin'
 // overwrite defaults
 Vue.use(VueLoading, {
     // dark: true, // default false
-    text: 'Chargement en cours', 
-    // default 'Loading'
+    text: 'Chargement en cours', // default 'Loading'
     // loading: true, 
     // default false
     // customLoader: myVueComponent, 
@@ -43,7 +42,6 @@ Vue.use(mdiVue, {
     icons: mdijs
 }) 
 
-
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(axios)
@@ -64,7 +62,30 @@ localStorage.getItem('user')
 
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify({
+        theme: {
+            themes: {
+                light: {
+                  primary: '#FFD600',
+                  secondary: '#E0E0E0',
+                  accent: '#82B1FF',
+                  error: '#FF5252',
+                  info: '#2196F3',
+                  success: '#4CAF50',
+                  warning: '#FB8C00',
+                },
+                dark: {
+                  primary: '#2196F3',
+                  secondary: '#424242',
+                  accent: '#FF4081',
+                  error: '#FF5252',
+                  info: '#2196F3',
+                  success: '#4CAF50',
+                  warning: '#FB8C00',
+                },
+              },
+        },
+    }),
     router: Routes,
     render: h => h(App)
 });

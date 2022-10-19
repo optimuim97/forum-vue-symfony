@@ -94,6 +94,7 @@ class ArticleService extends UtilsClass{
                 ->setContent($data->content)
                 ->setAuthor($author)
                 ->setCreatedAt(new DateTime())
+                ->setUpdatedAt(new DateTime())
                 ;
 
         $this->em->persist($article);

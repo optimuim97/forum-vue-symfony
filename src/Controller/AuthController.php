@@ -7,6 +7,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -27,16 +28,28 @@ class AuthController extends ApiController
      */
     public function register(Request $request, UserPasswordEncoderInterface $encoder): JsonResponse
     {
+
+        $errors = [];
         $request = $this->transformJsonBody($request);
 
         $username = $request->get('username');
         $password = $request->get('password');
         $email = $request->get('email');
 
-        if (empty($username) || empty($password) || empty($email)) {
-            return $this->respondValidationError("Invalid Username or Password or Email");
+        if (empty($username) ) {
+            array_push($errors, "Le Champ nom d'utilisateur ne doit pas rester vide");
+        }
+        if(empty($email)){
+            array_push($errors, "Le Champ email ne doit pas rester vide");
+        }
+        if (empty($password) ) {
+            array_push($errors, "Le Champ mot de passe ne doit pas rester vide");
         }
 
+        if(count($errors)){
+            return $this->respondValidationError(json_encode($errors));
+        }
+    
 
         $user = new User($username);
         $user->setPassword($encoder->encodePassword($user, $password));

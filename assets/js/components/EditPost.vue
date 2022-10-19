@@ -52,12 +52,12 @@
         methods : {
             upatePost (){
                 axios.post('/api/v1/article/'+this.data.id,this.form).then((res) => {
+                    console.log(res)
                     EventBus.$emit('afterEdit')
-
-                    this.$toastr('success', 'Post edited', 'Good')
+                    this.$toastr('success', 'Article Mise à jour', 'Super ✔️')
 
                 }).catch((err) => {
-                    console.log(error.response)
+                    console.log(err.response)
                 });
             },
             cancel(){
@@ -65,7 +65,7 @@
             },
             getHTML(){
                 let html = this.$refs.toastuiEditor.invoke('getHTML');
-                this.form.body = html
+                this.form.content = html
             }
         },
         created(){

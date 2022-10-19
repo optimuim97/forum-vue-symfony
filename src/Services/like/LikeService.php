@@ -6,8 +6,6 @@ use App\Entity\Like;
 use App\Helpers\UtilsClass;
 use App\Repository\ArticleRepository;
 use App\Repository\LikeRepository;
-use App\Repository\UserRepository;
-use App\Services\article\ArticleService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 

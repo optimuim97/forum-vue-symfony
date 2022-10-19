@@ -21,6 +21,7 @@ class Article
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles',targetEntity:User::class)]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?User $author = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]

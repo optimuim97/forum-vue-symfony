@@ -1,56 +1,72 @@
 <template>
     <v-container>
 
-        <h1>Sign Up</h1>
+        <v-layout align-center justify-center>
+            <div class="pa-md-4 mx-lg-auto" width="400px">
 
-        <v-form
-            ref="form"
-            @submit.prevent="register"
-        >
-            <v-text-field
-                v-model="form.username"
-                label="Username"
-                required
-            ></v-text-field>
-            <span class="red--text" v-if="errors">
-                {{ errors.username[0] ? errors.username[0] : "" }}
-            </span>
+                <div class="my-7">
+                    <v-icon
+                        large
+                        centered
+                        right
+                    >                    
+                        Créer mon Compte  
+                    </v-icon>
+                </div>
 
-            <v-text-field
-                v-model="form.email"
-                label="E-mail"
-                type="email"
-                required
-            ></v-text-field>
+                <v-form
+                    ref="form"
+                    @submit.prevent="register"
+                >
+                    <v-text-field
+                        v-model="form.username"
+                        label="Nom d'Utilisteur"
+                        required
+                    ></v-text-field>
+                    <span class="red--text" v-if="errors">
+                        {{ errors[0] ? errors[0] : "" }}
+                    </span>
 
-            <span class="red--text" v-if="errors">
-                {{ errors.name ? errors.name[0] : "" }}
-            </span>
+                    <v-text-field
+                        v-model="form.email"
+                        label="E-mail"
+                        type="email"
+                        required
+                    ></v-text-field>
 
-            <v-text-field
-                v-model="form.password"
-                label="Password"
-                type="password"
-                required
-            ></v-text-field>
+                    <span class="red--text" v-if="errors">
+                        {{ errors[1] ? errors[1] : "" }}
+                    </span>
 
-            <span class="red--text" v-if="errors">
-                {{ errors.password ? errors.password[0] : "" }}
-            </span>
-            
-            <v-btn
-                type="submit"
-                color="green"
-            >
-                Register
-            </v-btn>
+                    <v-text-field
+                        v-model="form.password"
+                        label="Mot de Passe"
+                        type="password"
+                        required
+                    ></v-text-field>
 
-            <v-btn color="blue">
-                <router-link to="/login">
-                    Login
-                </router-link>
-            </v-btn>
-        </v-form>
+                    <span class="red--text" v-if="errors">
+                        {{ errors[2] ? errors[2] : "" }}
+                    </span>
+                    
+                    <div class="d-flex justify-space-around my-6">
+
+                        <v-btn
+                            type="submit"
+                            color="primary"
+                        >
+                            Inscription
+                        </v-btn>
+
+                        <v-btn color="secondary" to="/login">
+                            Connexion
+                        </v-btn>
+
+                    </div>
+                    
+                </v-form>
+            </div>
+          </v-layout>
     </v-container>
 </template>
 
@@ -72,7 +88,7 @@ export default {
             axios.post('/api/register',this.form)
             .then((res) => {
 
-                this.$toastr('info', 'Account Created', 'Good')
+                this.$toastr('info', 'Création de votre compte a été éffectué', 'Super ✔️')
 
 
                 // console.log('>>>>>')
@@ -87,7 +103,26 @@ export default {
                 
             })
             .catch( (error) => {
-                console.log(error.response )
+
+                console.log(error.response.data.errors)
+                console.log(typeof(error.response.data.errors))
+
+                var str = error.response.data.errors
+                str = str.replace("[", "")
+                str = str.replace("]", "")
+                str = str.replace('"\"', "")
+                str = str.replace('vide"', "vide")
+                str = str.replace('vide"', "vide")
+                str = str.replace('vide"', "vide")
+                str = str.replace('"Le Champ', "Le Champ")
+                str = str.replace('"Le Champ', "Le Champ")
+                str = str.replace('"Le Champ', "Le Champ")
+                str = str.split(',')
+
+                this.errors = str
+                console.log(this.errors)
+                // this.errors = error.response
+                // console.log(this.errors.data)
             });
         }
     }

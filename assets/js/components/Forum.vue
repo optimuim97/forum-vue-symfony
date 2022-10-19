@@ -7,7 +7,7 @@
                         <p class="text-h5 font-weight-bold text-lg-center py-11"> Pas d'articles disponibles </p>
                     </v-card>
 
-                    <post v-else v-for="article in articles" :key="article.createdAt"  :article='article'></post>
+                    <post v-else v-for="article in articles" :key="article.id"  :article='article'></post>
                 </div>
             </v-flex>            
         </v-layout>

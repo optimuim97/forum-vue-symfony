@@ -75,7 +75,7 @@
 
         <v-spacer></v-spacer>
 
-        <v-content class="mt-4">     
+        <v-main class="mt-4">     
             <v-form  @submit.prevent="addComment">
             <v-container>
                 <v-row>
@@ -85,7 +85,7 @@
                             filled
                             clear-icon="mdi-close-circle"
                             clearable
-                            label="Add Comment"
+                            label="Votre Commentaire ..."
                             type="text"
                         >
                         </v-text-field>
@@ -94,7 +94,7 @@
                     </v-col>
 
                     <v-col cols="4">
-                        <v-btn class="py-3" color="success" type="submit"> Comment </v-btn>
+                        <v-btn class="py-3" color="success" type="submit"> Ajouter </v-btn>
                     </v-col>
 
                     
@@ -103,7 +103,7 @@
             </v-form>
 
             <v-divider></v-divider>
-        </v-content>  
+        </v-main>  
 
     </v-container>
 </template>
@@ -122,25 +122,35 @@
                 form:{
                     comment: null,
                     id : null
-                }
+                },
+                liked : null
             }
         },  
+        computed: {
+            
+        },
         methods : {
             edit(){
                 EventBus.$emit('startEditing')
             },  
             deleteArticle(){
+
                 axios.delete(`/api/v1/article/${this.data.id}`).then((result) => {
 
-                    console.log(">>>>>>>>>>>>>>")
-                    console.log(result)
-
-                    this.$toastr('info', 'Article deleted ❌!', 'Error')
+                    this.$toastr('info', 'Article Supprimé ❌!', 'Error')
 
                     this.$router.push('/forum')
 
                 }).catch((err) => {
-                    console.log(err)
+
+                    if(err.response.data != undefined){
+
+                        if(err.response.data.code == 401){
+                            console.log('>>>>>>>Before logout')
+                            EventBus.$emit('logout')
+                        }
+                    }
+
                 });
             },
             own(){
@@ -155,22 +165,51 @@
                     this.form = {}
 
                 }).catch((err) => {
-                    console.log(err)
+
+                    if(err.response.data != undefined){
+
+                        if(err.response.data.code == 401){
+                            console.log('>>>>>>>Before logout')
+                            EventBus.$emit('logout')
+                        }
+                        
+                    }        
+
                 });
             },
             like(){
                 axios.post(`/api/v1/like/${this.data.id}`).then((result) => {
-                    console.log(result)
-                    this.data.likes.push(result.data.like)
-                    console.log(result.data.article.lenght)
-                    
+
+                    this.data.likes = result.data.article.likes
+                    this.liked = true
                 }).catch((err) => {
-                    console.log(err)
+
+                    if(err.response.data != undefined){
+
+                        if(err.response.data.code == 401){
+                            console.log('>>>>>>>Before logout')
+                            EventBus.$emit('logout')
+                        }
+
+                    }
+
                 });
+            },
+            checkIfAlreadyLiked(){
+                console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ok')
+
+                
+
+                console.log(this.liked)
+
             }
         },
         created(){
-            this.own()
+            this.own(),
+            console.log(this.data)
+        },
+        mounted(){
+            this.checkIfAlreadyLiked()
         }
     }
 </script>

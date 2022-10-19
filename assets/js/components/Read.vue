@@ -29,6 +29,7 @@
             this.getArticle()
         },
         methods : {
+            
             listen (){
                 EventBus.$on('startEditing', () => {
                     this.editing = true
@@ -39,7 +40,6 @@
 
             },
             getArticle (){
-
         
                 const article_id = this.$route.params.id
 
@@ -64,8 +64,6 @@
                 }).finally(()=>{
                     this.$loading(false)
                 });
-
-           
 
             }
         }

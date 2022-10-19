@@ -1,35 +1,59 @@
 <template>
     <v-container>
-        <h2>Login</h2>
-        <v-form
-            ref="form"
-            @submit.prevent="login"
-        >
-            <v-text-field
-                v-model="form.username"
-                label="username"
-                required
-            ></v-text-field>
+        <v-layout align-center justify-center>
 
-            <v-text-field
-                v-model="form.password"
-                label="password"
-                type="password"
-                required
-            >
-            
-            </v-text-field>
+            <div class="pa-md-4 mx-lg-auto" width="400px">
+                <div class="my-7">
+                    <v-icon
+                        large
+                        centered
+                        right
+                    >                    
+                        Se Connecter   
+                    </v-icon>
+                </div>
 
-            <v-btn type="submit" color="green">
-                Connexion
-            </v-btn>
 
-            <v-btn color="blue">
-                <router-link to="/register">
-                    Inscription
-                </router-link>
-            </v-btn>
-        </v-form>
+                <v-form
+                    ref="form"
+                    @submit.prevent="login"
+                >
+                    <v-text-field
+                        v-model="form.username"
+                        label="Nom d'utilisateur"
+                        required
+                    ></v-text-field>
+
+                    <v-text-field
+                        v-model="form.password"
+                        label="Mot de passe"
+                        type="password"
+                        required
+                    >
+                    
+                    </v-text-field>
+
+
+                   <div class="d-flex justify-space-around my-6">
+                        <v-btn
+                            type="submit"
+                            color="primary"
+                            class="mr-2"
+                        >
+                            Connexion
+                        </v-btn>
+
+                        <v-btn color="secondary" to="/register">
+                            Inscription
+                        </v-btn>
+                    </div>
+                    
+
+                </v-form>
+
+            </div>
+        
+        </v-layout>
     </v-container>
 </template>
 

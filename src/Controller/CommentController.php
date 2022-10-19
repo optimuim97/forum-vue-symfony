@@ -2,41 +2,31 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
-use App\Entity\Comment;
+
 use App\Repository\ArticleRepository;
-use App\Repository\CommentRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Services\comment\CommentService;
 
 class CommentController extends AbstractController
 {
-    private $em;
-    private $commentRepository;
+    private $commentService;
     private $articleRepository;
-    public function __construct(CommentRepository $commentRepository,ArticleRepository $articleRepository, EntityManagerInterface $em){
-        $this->commentRepository = $commentRepository;
+    public function __construct(
+        ArticleRepository $articleRepository, 
+        CommentService $commentService,
+    ){  
         $this->articleRepository = $articleRepository;
-        $this->em = $em;
+        $this->commentService = $commentService;
     }   
 
     #[Route('/api/v1/comments', name: 'app_comments', methods : ['GET'])]
     public function getComments(): Response
     {
-        $comments = $this->commentRepository->findAll();
-        $length = count($comments);
-        // serialize($comments);
-       
-        return $this->json([
-            "message" => "All comments in database",
-            "status" => "200",
-            "length" => $length,
-            "data" => $comments
-        ]);
+        return $this->commentService->getAll();
     }
 
     #[Route('/api/v1/comment', name: 'app_create_comment', methods : ['POST'])]
@@ -45,19 +35,7 @@ class CommentController extends AbstractController
         $data = json_decode($request->getContent());
         $article = $this->articleRepository->find($data->id);
         
-        $comment = new Comment();
-        $comment->setComment($data->comment)  
-                ->setUser($this->getUser())
-                ->setCreatedAt(new DateTime())
-                ->setArticle($article);
-        
-        $this->em->persist($comment);
-        $this->em->flush();
-
-        return $this->json([
-            "message" => "New comment created!",
-            "status" => "201",
-            "data" => $comment
-        ]);
+        return $this->commentService->create($data, $article);
+      
     }
 }

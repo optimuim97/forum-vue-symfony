@@ -64,4 +64,18 @@ class ArticleController extends AbstractController
         return $this->likeService->likeOrDislike($id, $user);
     }
 
+
+    #[Route('/api/v1/user_data', name: 'app_user_data', methods:['GET'])]
+    public function index(): Response
+    {
+        $user = $this->getUser();
+
+        return $this->json([
+            "message" => "Utilisateur",
+            "status" => Response::HTTP_FOUND,
+            "data" => $user
+        ]);
+    }
+ 
+
 }
