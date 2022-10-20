@@ -36,6 +36,7 @@
         "vue": "2.7",
         "vue-axios": "^3.4.1",
         "vue-moment": "^4.1.0",
+        "vue-moment-locale": "^1.0.0",
         "vue-router": "^3",
         "vuejs-loading-plugin": "^1.0.51",
         "vuetify": "2.6.6",

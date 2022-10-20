@@ -13,22 +13,25 @@ import '../../node_modules/nprogress/nprogress.css'
 import VueToastr from '@deveodk/vue-toastr'
 import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 import VueLoading from 'vuejs-loading-plugin'
+import VueMomentLocalePlugin from 'vue-moment-locale'
 
-// Vue.use(VueLoading)
+Vue.use(VueMomentLocalePlugin, {
+    lang: 'fr'
+})
 
 // overwrite defaults
 Vue.use(VueLoading, {
-    // dark: true, // default false
     text: 'Chargement en cours', // default 'Loading'
+    background: 'rgb(255,255,255)', 
+    // dark: true, // default false
     // loading: true, 
     // default false
     // customLoader: myVueComponent, 
     // replaces the spinner and text with your own
-    background: 'rgb(255,255,255)', 
     // set custom background
     // classes: ['myclass'] 
     // array, object or string
-  })
+})
 
 Vue.use(VueToastr,{
     defaultPosition: 'toast-bottom-left',
@@ -36,7 +39,13 @@ Vue.use(VueToastr,{
     defaultTimeout: 2000
 })
 
-Vue.use(require('vue-moment'));
+const moment = require('moment')
+
+require('moment/locale/fr')
+
+Vue.use(require('vue-moment'), {
+    moment
+});
 
 Vue.use(mdiVue, {
     icons: mdijs
@@ -66,7 +75,8 @@ const app = new Vue({
         theme: {
             themes: {
                 light: {
-                  primary: '#FFD600',
+                  primary: '#82B1FF',
+                //   primary: '#FFD600',
                   secondary: '#E0E0E0',
                   accent: '#82B1FF',
                   error: '#FF5252',

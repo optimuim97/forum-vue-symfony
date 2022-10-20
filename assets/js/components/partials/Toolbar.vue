@@ -26,17 +26,19 @@
       bottom
       temporary
     >
+
       <v-list>
         <v-list-item-group v-model="group">
           <v-list-item
             v-for="item in items"
             :key="item.title" :to="item.to"
           >
-            <v-list-item-icon>
+            <!-- <v-list-item-icon> -->
               <!-- <v-icon v-text="item.icon"></v-icon> -->
-            </v-list-item-icon>
+            <!-- </v-list-item-icon> -->
             <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
+                <v-list-item-title v-text="item.title" v-if="item.show">
+                </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -54,9 +56,9 @@
               items : [
                 { title : "Forum", to: '/forum', show : User.loggIn() },
                 { title : "Ajouter Article", to: '/create', show : User.loggIn() },
-                { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) },
                 { title : "Mon Profil", to: '/profil', show : ( User.loggIn() ) },
                 { title : "Déconnexion", to: '/logout', show : User.loggIn() }
+                { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) },
               ],
               drawer: false,
               group: null
@@ -80,8 +82,9 @@
             this.items = [
               { title : "Forum", to: '/forum', show : User.loggIn() },
               { title : "Ajouter Article", to: '/create', show : User.loggIn() },
+              { title : "Mon Profil", to: '/profil', show : ( User.loggIn() ) },
+              { title : "Déconnexion", to: '/logout', show : User.loggIn() },
               { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) },
-              { title : "Déconnexion", to: '/logout', show : User.loggIn() }
             ]
           })
         }

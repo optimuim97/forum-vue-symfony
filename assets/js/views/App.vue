@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <toolbar></toolbar> 
-             <router-view>
+            <router-view>
             </router-view>
         <app-footer></app-footer> 
     </v-app>
@@ -24,5 +24,7 @@
 </script>
 
 <style scoped>
-
+    .page-bg{
+        background-image: url('../../svg/Scenes/Scenes03.svg');
+    }
 </style>

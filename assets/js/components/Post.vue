@@ -7,9 +7,8 @@
         </v-card-title>
 
         <v-card-subtitle> 
-            <span>{{ article.createdAt | moment("dddd, MMMM Do YYYY") }}</span>   
+            <span>{{ article.createdAt | moment("from", "now") }}</span>   
 
-                 
             <v-card-title class="text-h5 font-weight-bold" style="font-size:20px;" v-html="article.content">
             
             </v-card-title>

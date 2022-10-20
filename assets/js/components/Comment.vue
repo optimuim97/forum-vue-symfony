@@ -5,7 +5,7 @@
                 <div>
                     <h3 class="headline mb-0"> 👨🏿‍🦲 {{ comment.User.username}}</h3>
                     <div>{{ comment.comment }}</div>
-                    <div>{{ comment.createdAt | moment("dddd, MMMM Do YYYY") }}</div>
+                    <div>{{ comment.createdAt | moment("from","now") }}</div>
                 </div>
             </v-card-title>
         </v-card>            

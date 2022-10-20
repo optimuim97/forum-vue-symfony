@@ -5991,6 +5991,11 @@
     "vue-hot-reload-api" "^2.3.0"
     "vue-style-loader" "^4.1.0"
 
+"vue-moment-locale@^1.0.0":
+  "integrity" "sha512-s2pCP1PeR+3VyCRuEGUYAleqACdi7nNBFvYesj1ptc599cZo/a2u0/iYGCP39Wwiu5xiHhFQt7jHA75uNgs9Mg=="
+  "resolved" "https://registry.npmjs.org/vue-moment-locale/-/vue-moment-locale-1.0.0.tgz"
+  "version" "1.0.0"
+
 "vue-moment@^4.1.0":
   "integrity" "sha512-Gzisqpg82ItlrUyiD9d0Kfru+JorW2o4mQOH06lEDZNgxci0tv/fua1Hl0bo4DozDV2JK1r52Atn/8QVCu8qQw=="
   "resolved" "https://registry.npmjs.org/vue-moment/-/vue-moment-4.1.0.tgz"
