@@ -57,8 +57,8 @@
                 { title : "Forum", to: '/forum', show : User.loggIn() },
                 { title : "Ajouter Article", to: '/create', show : User.loggIn() },
                 { title : "Mon Profil", to: '/profil', show : ( User.loggIn() ) },
-                { title : "Déconnexion", to: '/logout', show : User.loggIn() }
-                { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) },
+                { title : "Déconnexion", to: '/logout', show : User.loggIn() },
+                { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) }
               ],
               drawer: false,
               group: null
@@ -76,16 +76,17 @@
 
           }) 
          ,
-         EventBus.$on('login', () => {
-            this.$router.push({path: '/forum' })
+          EventBus.$on('login', () => {
+              this.$router.push({path: '/forum' })
 
-            this.items = [
-              { title : "Forum", to: '/forum', show : User.loggIn() },
-              { title : "Ajouter Article", to: '/create', show : User.loggIn() },
-              { title : "Mon Profil", to: '/profil', show : ( User.loggIn() ) },
-              { title : "Déconnexion", to: '/logout', show : User.loggIn() },
-              { title : "Se Connecté", to: '/login', show : ! ( User.loggIn() ) },
-            ]
+              this.items = [
+                { title : "Forum", to: '/forum', show : User.loggIn() },
+                { title : "Ajouter Article", to: '/create', show : User.loggIn() },
+                { title : "Mon Profil", to: '/profil', show : User.loggIn() },
+                { title : "Déconnexion", to: '/logout', show : User.loggIn() },
+                { title : "Se Connecté", to: '/login', show : ! (User.loggIn()) },
+              ]
+
           })
         }
     }

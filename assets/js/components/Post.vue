@@ -17,7 +17,30 @@
                 <v-list-item-title class="ml-3"> Publié par <span class="text-h6">  {{ article.author.username }} </span> </v-list-item-title>
             </div> 
         </v-card-subtitle>
-            
+
+        <v-card-actions>
+                <v-row
+                    align="center"
+                    class="ml-4 mb-2"
+                    justify="start"
+                >
+                    <v-icon class="mr-1">
+                        mdi-heart
+                    </v-icon>
+                    
+                    <span class="subheading mr-2">
+                        {{ article.likes.length }}
+                    </span>
+                    
+                    <span class="mr-1">·</span>
+                    <v-icon class="mr-1">
+                        mdi-message-text-outline
+                    </v-icon>
+                    <span class="subheading">
+                        {{ article.comments.length }}
+                    </span>
+                </v-row>
+        </v-card-actions>   
     </v-card>
 </template>
 

@@ -95,9 +95,7 @@
 
                     <v-col cols="4">
                         <v-btn class="py-3" color="success" type="submit"> Ajouter </v-btn>
-                    </v-col>
-
-                    
+                    </v-col>                    
                 </v-row>
             </v-container>
             </v-form>
@@ -137,7 +135,7 @@
 
                 axios.delete(`/api/v1/article/${this.data.id}`).then((result) => {
 
-                    this.$toastr('info', 'Article Supprimé ❌!', 'Error')
+                    this.$toastr('error', 'Article Supprimé ❌!', 'Super ☑️')
 
                     this.$router.push('/forum')
 

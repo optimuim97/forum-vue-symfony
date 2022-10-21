@@ -121,7 +121,10 @@ class Article
     public function removeLike(Like $like): self
     {
         $this->likes->removeElement($like);
-        $like->setArticle(null);
+        
+        if ($like->getArticle() === $this) {
+            $like->setArticle(null);
+        }
 
         return $this;
     }

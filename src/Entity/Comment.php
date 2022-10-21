@@ -2,12 +2,10 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource as AnnotationApiResource;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-// #[AnnotationApiResource()]
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
@@ -19,7 +17,7 @@ class Comment
     private ?string $comment = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments', targetEntity:Article::class)]
-    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    #[ORM\JoinColumn(name:"article_id", referencedColumnName:"id", onDelete:"CASCADE")]
     private ?Article $article = null;
 
     #[ORM\ManyToOne(cascade: ['persist', 'remove'])]
@@ -33,6 +31,15 @@ class Comment
     public function getComment(): ?string
     {
         return $this->comment;
+    }
+
+    public function getArticle($need = false): ?Article
+    {
+        if($need == true){
+            return $this->article;
+        }else{
+            return null;
+        }
     }
 
     public function setComment(string $comment): self
