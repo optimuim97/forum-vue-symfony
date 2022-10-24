@@ -33,8 +33,10 @@ class AuthController extends ApiController
         $request = $this->transformJsonBody($request);
 
         $username = $request->get('username');
-        $password = $request->get('password');
         $email = $request->get('email');
+        $dial_code = $request->get('dial_code');
+        $phone_number = $request->get('phone_number');
+        $password = $request->get('password');
 
         if (empty($username) ) {
             array_push($errors, "Le Champ nom d'utilisateur ne doit pas rester vide");
@@ -55,6 +57,8 @@ class AuthController extends ApiController
         $user->setPassword($encoder->encodePassword($user, $password));
         $user->setEmail($email);
         $user->setUsername($username);
+        $user->setDialCode($dial_code);
+        $user->setPhoneNumber($phone_number);
         $user->setCreatedAt(new \DateTime());
         $user->setUpdatedAt(new \DateTime());
         $this->em->persist($user);

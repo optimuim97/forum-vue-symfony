@@ -23,9 +23,30 @@
                         label="Nom d'Utilisteur"
                         required
                     ></v-text-field>
+
                     <span class="red--text" v-if="errors">
                         {{ errors[0] ? errors[0] : "" }}
                     </span>
+
+                    <!-- <v-row> -->
+                    <div class="d-flex flex-row">
+                        <div class="dial_code mt-3"> 
+                            <vue-country-code
+                                @onSelect="onSelect"
+                                :preferredCountries="['ci', 'bf', 'fr']">
+                            </vue-country-code>
+                        </div>
+
+                        <v-text-field
+                            class="ml-2"
+                            v-model="form.phone_number"
+                            type="tel"
+                            label="Numéro de Téléphone"
+                            required
+                        ></v-text-field>
+                    </div>
+
+                    <!-- </v-row> -->
 
                     <v-text-field
                         v-model="form.email"
@@ -50,7 +71,6 @@
                     </span>
                     
                     <div class="d-flex justify-space-around my-6">
-
                         <v-btn
                             type="submit"
                             color="primary"
@@ -61,7 +81,6 @@
                         <v-btn color="secondary" to="/login">
                             Connexion
                         </v-btn>
-
                     </div>
                     
                 </v-form>
@@ -77,7 +96,8 @@ export default {
             form : {
                 name : null,
                 email : null,
-                password : null
+                password : null,
+                dial_code : null
             },
             errors : null
         }
@@ -87,20 +107,8 @@ export default {
             console.log(this.form)
             axios.post('/api/register',this.form)
             .then((res) => {
-
                 this.$toastr('info', 'Création de votre compte a été éffectué', 'Super ✔️')
-
-
-                // console.log('>>>>>')
-                // console.log(res)
-                // User.responseAfterLogin(res)
                 this.$router.push({path :`/login` })
-
-                // if(User.loggIn()){
-                // }else{
-                //     console.log('Une erreur est survenue ...')
-                // }
-                
             })
             .catch( (error) => {
 
@@ -124,7 +132,18 @@ export default {
                 // this.errors = error.response
                 // console.log(this.errors.data)
             });
+        },
+        onSelect({name, iso2, dialCode}) {
+            console.log(name, iso2, dialCode);
+
+            this.form.dial_code = dialCode
         }
     }
 }
 </script>
+
+<style scoped>
+.dial_code{
+    height: 100%;
+}
+</style>

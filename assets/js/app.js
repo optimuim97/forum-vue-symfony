@@ -14,6 +14,7 @@ import VueToastr from '@deveodk/vue-toastr'
 import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 import VueLoading from 'vuejs-loading-plugin'
 import VueMomentLocalePlugin from 'vue-moment-locale'
+import VueCountryCode from "vue-country-code"
 
 Vue.use(VueMomentLocalePlugin, {
     lang: 'fr'
@@ -26,7 +27,8 @@ Vue.use(VueLoading, {
 })
 
 Vue.use(VueToastr,{
-    defaultPosition: 'toast-bottom-left',
+    // defaultPosition: 'toast-bottom-left',
+    defaultPosition: 'toast-top-right',
     defaultType: 'info',
     defaultTimeout: 2000
 })
@@ -38,15 +40,15 @@ require('moment/locale/fr')
 Vue.use(require('vue-moment'), {
     moment
 });
-
 Vue.use(mdiVue, {
     icons: mdijs
 }) 
-
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(axios)
 Vue.use(Editor)
+Vue.use(VueCountryCode);
+
 
 window.User = User;
 window.Storage = AppStorage

@@ -121,7 +121,8 @@
                     comment: null,
                     id : null
                 },
-                liked : null
+                liked : null,
+                article : null
             }
         },  
         computed: {
@@ -151,8 +152,10 @@
 
                 });
             },
+            check(){
+            },
             own(){
-                return this.data.author.username == localStorage.getItem('user')
+                return this.data.author.username.toLowerCase() == localStorage.getItem('user')
             },
             addComment(){
                 this.form.id = this.data.id
@@ -163,6 +166,8 @@
                     this.form = {}
 
                 }).catch((err) => {
+
+                    console.log(err.response)
 
                     if(err.response.data != undefined){
 
@@ -178,9 +183,11 @@
             like(){
                 axios.post(`/api/v1/like/${this.data.id}`).then((result) => {
 
-                    this.data.likes = result.data.article.likes
-                    this.liked = true
+                    this.data.likes = result.data.article.likes                    
+
                 }).catch((err) => {
+
+                    console.log(err)
 
                     if(err.response.data != undefined){
 
@@ -192,22 +199,12 @@
                     }
 
                 });
-            },
-            checkIfAlreadyLiked(){
-                console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Ok')
-
-                
-
-                console.log(this.liked)
-
             }
         },
         created(){
+            this.check(),
             this.own(),
-            console.log(this.data)
-        },
-        mounted(){
-            this.checkIfAlreadyLiked()
+            this.article = this.data
         }
     }
 </script>

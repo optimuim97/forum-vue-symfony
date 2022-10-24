@@ -15,7 +15,7 @@ class Like
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'likes', targetEntity:Article::class)]
-    #[ORM\JoinColumn(name:"article_id", referencedColumnName:"id", onDelete:"CASCADE")]
+    #[ORM\JoinColumn(name:"article_id", referencedColumnName:"id", onDelete:"CASCADE", )]
     private ?Article $article = null;
 
     #[ORM\ManyToOne]
@@ -26,13 +26,9 @@ class Like
         return $this->id;
     }
 
-    public function getArticle($need = false): ?Article
+    public function getArticle($need = false)
     {
-        if($need == true){
-            return $this->article;
-        }else{
-            return null;
-        }
+        return $need == true ? $this->article : null;
     }
 
     public function setArticle(?Article $article): self

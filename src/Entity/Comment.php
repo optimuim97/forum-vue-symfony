@@ -16,9 +16,10 @@ class Comment
     #[ORM\Column(type: Types::TEXT)]
     private ?string $comment = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments', targetEntity:Article::class)]
+    #[ORM\ManyToOne(inversedBy: 'comments', targetEntity:Article::class,cascade:['persist', 'remove'])]
     #[ORM\JoinColumn(name:"article_id", referencedColumnName:"id", onDelete:"CASCADE")]
     private ?Article $article = null;
+    
 
     #[ORM\ManyToOne(cascade: ['persist', 'remove'])]
     private ?User $User = null;

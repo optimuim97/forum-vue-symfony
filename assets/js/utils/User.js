@@ -5,50 +5,50 @@ import router from '../routes.js';
 class User {
 
     
-    login(data) 
-    {
+    // login(data) 
+    // {
 
-        var username_ = data.username;
+    //     var username_ = data.username;
 
-        console.log("Sended datas ...")
-        // console.log(data)
+    //     console.log("Sended datas ...")
+    //     // console.log(data)
 
-        axios
-            .post("api/login_check", data)
-            .then((res) => {
+    //     axios
+    //         .post("api/login_check", data)
+    //         .then((res) => {
 
-                console.log("login response...")
-                const access_token = res.data.token;
-                const username = username_;
-                console.log("res.data ...")
-                console.log(res)
-                console.log("response after login ...")
-                console.log(">>>>>UserName<<<<", ">>>>>Access Token<<<<<")
-                console.log(username_, access_token)
+    //             console.log("login response...")
+    //             const access_token = res.data.token;
+    //             const username = username_;
+    //             console.log("res.data ...")
+    //             console.log(res)
+    //             console.log("response after login ...")
+    //             console.log(">>>>>UserName<<<<", ">>>>>Access Token<<<<<")
+    //             console.log(username_, access_token)
                 
-                if (Token.isValid(access_token)) {
-                    AppStorage.storeData(username, access_token);
-                    EventBus.$emit('login')       
-                    console.log(this.loggIn())  
+    //             if (Token.isValid(access_token)) {
+    //                 AppStorage.storeData(username, access_token);
+    //                 EventBus.$emit('login')       
+    //                 console.log(this.loggIn())  
                     
-                    window.axios = require('axios');
-                    const JWTToken = `Bearer ${localStorage.getItem('token')}`
+    //                 window.axios = require('axios');
+    //                 const JWTToken = `Bearer ${localStorage.getItem('token')}`
 
-                    window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-                    window.axios.defaults.headers.common['Authorization'] = JWTToken;
+    //                 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    //                 window.axios.defaults.headers.common['Authorization'] = JWTToken;
 
-                    this.$toastr('success', 'You are logged', 'Good')
+    //                 this.$toastr('success', 'You are logged', 'Good')
 
-                } else {
-                    alert("User is not valid");
-                    return false;
-                }
+    //             } else {
+    //                 alert("User is not valid");
+    //                 return false;
+    //             }
 
-            })
-            .catch((error) => (error) => {
-                this.$toastr('error', 'Email ou mot de passe incorrect ...', '❌')
-            });
-    }
+    //         })
+    //         .catch((error) => (error) => {
+    //             this.$toastr('error', 'Email ou mot de passe incorrect ...', '❌')
+    //         });
+    // }
 
     hasToken() {
         const storedToken = AppStorage.getToken();

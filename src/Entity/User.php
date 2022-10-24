@@ -35,6 +35,15 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     #[Assert\NotNull(message:"Ce Champ ne doit pas être vide")]
     private ?string $password = null;
 
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $phone_number = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image_url = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $dial_code = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -140,10 +149,10 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Article>
      */
-    // public function getArticles(): Collection
-    // {
-    //     return $this->articles;
-    // }
+    public function getArticles($need = false)
+    {
+        return $need == true ? $this->articles : null;
+    }
 
     public function addArticle(Article $article): self
     {
@@ -175,6 +184,42 @@ class User implements UserInterface,PasswordAuthenticatedUserInterface
     //         $this->username,
     //     ]);
     // }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phone_number;
+    }
+
+    public function setPhoneNumber(?string $phone_number): self
+    {
+        $this->phone_number = $phone_number;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->image_url;
+    }
+
+    public function setImageUrl(?string $image_url): self
+    {
+        $this->image_url = $image_url;
+
+        return $this;
+    }
+
+    public function getDialCode(): ?string
+    {
+        return $this->dial_code;
+    }
+
+    public function setDialCode(string $dial_code): self
+    {
+        $this->dial_code = $dial_code;
+
+        return $this;
+    }
   
 
 }

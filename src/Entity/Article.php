@@ -21,7 +21,7 @@ class Article
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles',targetEntity:User::class)]
-    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    // #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?User $author = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
@@ -122,9 +122,9 @@ class Article
     {
         $this->likes->removeElement($like);
         
-        if ($like->getArticle() === $this) {
+        // if ($like->getArticle() === $this) {
             $like->setArticle(null);
-        }
+        // }
 
         return $this;
     }
