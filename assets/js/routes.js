@@ -12,7 +12,7 @@ import NProgress from 'nprogress';
 
 const router = new VueRouter({
     // hashbang:true,
-    mode: 'history',
+    // mode: 'history',
     routes:
     [
         {

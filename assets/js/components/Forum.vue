@@ -8,6 +8,8 @@
                     </v-card>
 
                     <post v-else v-for="article in articles" :key="article.id"  :article='article'></post>
+
+                    <v-divider vertical dark height="2px"></v-divider>
                 </div>
             </v-flex>            
         </v-layout>
