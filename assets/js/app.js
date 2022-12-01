@@ -16,27 +16,24 @@ import VueLoading from 'vuejs-loading-plugin'
 import VueMomentLocalePlugin from 'vue-moment-locale'
 import VueCountryCode from "vue-country-code"
 
+
+const moment = require('moment')
+require('moment/locale/fr')
+
 Vue.use(VueMomentLocalePlugin, {
     lang: 'fr'
 })
-
 // overwrite defaults
 Vue.use(VueLoading, {
     text: 'Chargement en cours', // default 'Loading'
     background: 'rgb(255,255,255)'
 })
-
 Vue.use(VueToastr,{
     // defaultPosition: 'toast-bottom-left',
     defaultPosition: 'toast-top-right',
     defaultType: 'info',
     defaultTimeout: 2000
 })
-
-const moment = require('moment')
-
-require('moment/locale/fr')
-
 Vue.use(require('vue-moment'), {
     moment
 });

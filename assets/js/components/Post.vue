@@ -1,5 +1,5 @@
 <template>
-    <v-card :href="path_">
+    <v-card :href="`#/${path_}`">
         <v-card-title class="text-h5 font-weight-bold"> 
             <router-link :to="path_">
                 {{ article.title }}    

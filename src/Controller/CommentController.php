@@ -4,7 +4,6 @@ namespace App\Controller;
 
 
 use App\Repository\ArticleRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +32,7 @@ class CommentController extends AbstractController
     public function createComment(Request $request)
     {   
         $data = json_decode($request->getContent());
+
         $article = $this->articleRepository->find($data->id);
         
         return $this->commentService->create($data, $article);
