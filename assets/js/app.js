@@ -84,7 +84,7 @@ const app = new Vue({
                   success: '#4CAF50',
                   warning: '#FB8C00',
                 },
-              },
+            },
         },
     }),
     router: Routes,

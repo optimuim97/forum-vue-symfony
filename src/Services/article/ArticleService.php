@@ -69,33 +69,19 @@ class ArticleService extends UtilsClass{
 
     }
 
-    public function create($data,$user){
-        
-        if (empty($data->title)) {
-            return $this->json([
-                "message"=> "Le Champ titre ne doit pas rester vide",
-                "field"=>'title',
-                "status_code"=> Response::HTTP_UNPROCESSABLE_ENTITY
-            ]);
-        }
-
-        if (empty($data->content)) {
-            return $this->json([
-                "message"=> "Le Champ contenu ne doit pas rester vide",
-                "field"=>'content',
-                "status_code"=> Response::HTTP_UNPROCESSABLE_ENTITY
-            ]);
-        }
-
+    public function create($data,$user, $file){
         $author = $user;
        
         $article = new Article();
-        $article->setTitle($data->title)  
-                ->setContent($data->content)
+        $article->setTitle($data['title'])  
+                ->setContent($data['content'])
                 ->setAuthor($author)
                 ->setCreatedAt(new DateTime())
-                ->setUpdatedAt(new DateTime())
-                ;
+                ->setUpdatedAt(new DateTime());
+
+
+        $article->addThumbnail($file);
+
 
         $this->em->persist($article);
         $this->em->flush();

@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Cocur\Slugify\Slugify;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Category
 {
     #[ORM\Id]
@@ -25,6 +27,11 @@ class Category
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\PrePersist]
+    public function prePersist(){
+        $this->slug = (new Slugify())->slugify($this->name); 
+    }
 
     public function getId(): ?int
     {

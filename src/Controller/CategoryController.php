@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Category;
 use App\Services\category\CategoryService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,58 +24,15 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/api/v1/add-category', name: 'app_category', methods:['POST'])]
-    public function index(Request $request): Response
-    {         
-        $category = new Category();
-        $errors = [];
+    public function addCategory(Request $request): Response
+    {   
+        $data = $request->request->all(); 
+        $file = $request->files->get('url');
+        return $this->categoryService->add($data, $file);
+    }
 
-        $datas = $request->request->all();
-        $require_params = ["name", "description"];
-
-        //TODO function for check errors
-        if ($datas) {
-            foreach ($require_params as $value) {
-                if (!array_key_exists($value, $datas)) {
-                    $errors[] = "$value must be set.";
-                    $message = "Required field missing";
-                } elseif (empty($datas[$value])) {
-                    $errors[] = "$value must not be empty.";
-                    $message = "Empty field found.";
-                }
-            }
-        } else {
-            $errors[] = "Request body can't be empty";
-            $message = "Request body not found.";
-        }
-
-        if(!empty($errors)){
-            return $this->json([
-                "message" =>$message,
-                "errors" => $errors,
-                "status_code" => Response::HTTP_UNPROCESSABLE_ENTITY
-            ]);
-        }
-
-        $category->setName($datas['name']);
-
-        //Generate Slug with name
-        $slug = $this->slugGenerator->slug($datas['name']);
-        $category->setSlug($slug);
-
-        $category->setDescription($request->get('description'));
-        $image_prepare = file_get_contents($request->files->get('url')->getRealPath());
-        //Convert Image To Base 64
-        $image = base64_encode($image_prepare);
-
-        $category->setLogoUrl($image);
-
-        $this->em->persist($category);
-        $this->em->flush();
-
-        return $this->json([
-            "message"=>"Saved",
-            "status_code"=> Response::HTTP_CREATED,
-            "data"=> $category
-        ]);
+    #[Route('/api/v1/categories', name: 'get_category', methods:['GET'])]
+    public function getCategory(){
+        return $this->categoryService->getCategory();
     }
 }

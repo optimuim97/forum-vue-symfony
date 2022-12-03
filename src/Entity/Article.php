@@ -29,11 +29,15 @@ class Article
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Like::class)]
     private Collection $likes;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Thumbnail::class, cascade:['persist', 'remove'])]
+    private Collection $thumbnails;
    
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->thumbnails = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,6 +139,36 @@ class Article
     public function getLikes() : Collection
     {
         return $this->likes;
+    }
+
+    /**
+     * @return Collection<int, Thumbnail>
+     */
+    public function getThumbnails(): Collection
+    {
+        return $this->thumbnails;
+    }
+
+    public function addThumbnail(Thumbnail $thumbnail): self
+    {
+        if (!$this->thumbnails->contains($thumbnail)) {
+            $this->thumbnails->add($thumbnail);
+            $thumbnail->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeThumbnail(Thumbnail $thumbnail): self
+    {
+        if ($this->thumbnails->removeElement($thumbnail)) {
+            // set the owning side to null (unless already changed)
+            if ($thumbnail->getArticle() === $this) {
+                $thumbnail->setArticle(null);
+            }
+        }
+
+        return $this;
     }
 
 }
